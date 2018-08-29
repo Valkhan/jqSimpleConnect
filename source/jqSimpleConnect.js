@@ -201,10 +201,11 @@ jqSimpleConnect.connect = function (elementA, elementB, options) {
     div1 = jQuery(div.replace('divUniqueIdentifier', connection.id + '_1'));
     div2 = jQuery(div.replace('divUniqueIdentifier', connection.id + '_2'));
     div3 = jQuery(div.replace('divUniqueIdentifier', connection.id + '_3'));
-    if(options !== null && typeof options.onClickRemove !== 'undefined'){
-        div1.on('click',options.onClickRemove);
-        div2.on('click',options.onClickRemove);
-        div3.on('click',options.onClickRemove);
+    // Added callback for connection Click
+    if(options !== null && typeof options.onClick !== 'undefined'){
+        div1.on('click',options.onClick);
+        div2.on('click',options.onClick);
+        div3.on('click',options.onClick);
     }
     jQuery('body').prepend(div1);
     jQuery('body').prepend(div2);
@@ -264,7 +265,7 @@ jqSimpleConnect.removeConnection = function (connectionId) {
 
 
 /**
- * Removes a connection.
+ * Hide a connection.
  *
  * @param {string} connectionId The connection identifier.
  * @returns {boolean} 'true' if the operation was done, 'false' if the connection no exists.
@@ -279,9 +280,9 @@ jqSimpleConnect.hideConnection = function (connectionId) {
 }
 
 /**
- * Removes a connection.
+ * Hide a list of connections.
  *
- * @param {string} connectionId The connection identifier.
+ * @param {string} connectionId Object of connection list identifier.
  * @returns {boolean} 'true' if the operation was done, 'false' if the connection no exists.
  */
 jqSimpleConnect.hideConnections = function (connectionId) {
@@ -292,20 +293,13 @@ jqSimpleConnect.hideConnections = function (connectionId) {
 
 
 /**
- * Removes a connection.
+ * Show a connection.
  *
  * @param {string} connectionId The connection identifier.
  * @returns {boolean} 'true' if the operation was done, 'false' if the connection no exists.
  */
 jqSimpleConnect.showConnection = function (connectionId) {
-    if (typeof connectionId === 'object') {
-        $(connectionId).each(function () {
-            jqSimpleConnect.showConnection(this);
-        });
-        return;
-    }
     if (jqSimpleConnect._connections[connectionId] != null) {
-        // Remove HTML element.
         jQuery('.jqSimpleConnect.' + connectionId).show();
         return true;
     }
@@ -313,9 +307,9 @@ jqSimpleConnect.showConnection = function (connectionId) {
 }
 
 /**
- * Removes a connection.
+ * Shows a list of connections
  *
- * @param {string} connectionId The connection identifier.
+ * @param {object} connectionId Object with the connection identifier.
  * @returns {boolean} 'true' if the operation was done, 'false' if the connection no exists.
  */
 jqSimpleConnect.showConnections = function (connectionId) {
