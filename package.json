@@ -1,5 +1,5 @@
 {
-  "name": "jq-simple-connect",
+  "name": "valkhan/jq-simple-connect",
   "version": "1.0.0",
   "description": "A lightweight JavaScript library which allows to visually connect elements in a web page",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jfmdev/jqsimpleconnect.git"
+    "url": "git://github.com/valkhan/jqsimpleconnect.git"
   },
   "keywords": [
     "jquery",
